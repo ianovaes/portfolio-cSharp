@@ -1,4 +1,4 @@
-﻿namespace Xadrez.Tabuleiro
+﻿namespace JogoTabuleiro.Tabuleiro
 {
     internal class Peca
     {
@@ -10,11 +10,11 @@
 
         public Tabuleiro Tabuleiro { get; protected set; }
 
-        public Peca(Posicao posicao, Cor cor, Tabuleiro tabuleiro)
+        public Peca(Tabuleiro tabuleiro, Cor cor)
         {
-            Posicao = posicao;
-            Cor = cor;
             Tabuleiro = tabuleiro;
+            Cor = cor;
+            Posicao = null;
             QuantidadeMovimento = 0;
         }
     }

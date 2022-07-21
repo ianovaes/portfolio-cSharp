@@ -1,4 +1,4 @@
-﻿namespace Xadrez.Tabuleiro
+﻿namespace JogoTabuleiro.Tabuleiro
 {
     class Posicao
     {
