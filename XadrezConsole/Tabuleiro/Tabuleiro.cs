@@ -30,7 +30,6 @@
             ValidarPosicao(posicao);
             return Peca(posicao) != null;
         }
-
         public void ColocarPeca(Peca peca, Posicao posicao)
         {
             if (ExistePeca(posicao))
@@ -40,6 +39,19 @@
             
             _pecas[posicao.Linha, posicao.Coluna] = peca;
             peca.Posicao = posicao;
+        }
+
+        public Peca RetirarPeca(Posicao posicao)
+        {
+            if (Peca(posicao) == null)
+            {
+                return null;
+            }
+
+            Peca posicaoPeca = Peca(posicao);
+            posicaoPeca.Posicao = null;
+            _pecas[posicao.Linha, posicao.Coluna] = null;
+            return posicaoPeca;
         }
 
         public bool PosicaoValida(Posicao posicao)

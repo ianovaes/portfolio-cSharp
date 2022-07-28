@@ -17,5 +17,10 @@
             Posicao = null;
             QuantidadeMovimento = 0;
         }
+
+        public void ImcrementarQtdeMovimento()
+        {
+            QuantidadeMovimento++;
+        }
     }
 }
