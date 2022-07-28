@@ -1,5 +1,4 @@
-﻿using System;
-using JogoTabuleiro.Tabuleiro;
+﻿using JogoTabuleiro.Tabuleiro;
 using Xadrez;
 
 
@@ -9,27 +8,50 @@ namespace XadrezConsole
     {
         public static void ImprimirTabuleiro(Tabuleiro tabuleiro)
         {
-            for(int indexLinha = 0; indexLinha < tabuleiro.Linhas; indexLinha++)
+            for (int indexLinha = 0; indexLinha < tabuleiro.Linhas; indexLinha++)
             {
                 Console.Write($"{8 - indexLinha} ");
 
                 for (int indexColuna = 0; indexColuna < tabuleiro.Colunas; indexColuna++)
                 {
-                    if (tabuleiro.Peca(indexLinha, indexColuna) == null)
-                    {
-                        Console.Write("- ");
-                    }
-                    else
-                    {
-                        ImprimirPeca(tabuleiro.Peca(indexLinha, indexColuna));
-                        Console.Write(" ");
-                    }
+                    ImprimirPeca(tabuleiro.Peca(indexLinha, indexColuna));
                 }
 
                 Console.WriteLine();
             }
 
             Console.WriteLine("  a b c d e f g h");
+        }
+
+        public static void ImprimirTabuleiro(Tabuleiro tabuleiro, bool[,] posicoesPossiveis)
+        {
+            ConsoleColor fundoOriginal = Console.BackgroundColor;
+            ConsoleColor fundoAlterado = ConsoleColor.DarkGray;
+            
+            for (int indexLinha = 0; indexLinha < tabuleiro.Linhas; indexLinha++)
+            {
+                Console.Write($"{8 - indexLinha} ");
+
+                for (int indexColuna = 0; indexColuna < tabuleiro.Colunas; indexColuna++)
+                {
+                    if (posicoesPossiveis[indexLinha, indexColuna])
+                    {
+                        Console.BackgroundColor = fundoAlterado;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = fundoOriginal;
+                    }
+
+                    ImprimirPeca(tabuleiro.Peca(indexLinha, indexColuna));
+                    Console.BackgroundColor = fundoOriginal;
+                }
+
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("  a b c d e f g h");
+            Console.BackgroundColor = fundoOriginal;
         }
 
         public static PosicaoXadrez LerPosicaoXadrez()
@@ -42,16 +64,25 @@ namespace XadrezConsole
 
         public static void ImprimirPeca(Peca peca)
         {
-            if (peca.Cor == Cor.Branca)
+            if (peca == null)
             {
-                Console.Write(peca);
+                Console.Write("- ");
             }
             else
             {
-                ConsoleColor consoleColor = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write(peca);
-                Console.ForegroundColor = consoleColor;
+                if (peca.Cor == Cor.Branca)
+                {
+                    Console.Write(peca);
+                }
+                else
+                {
+                    ConsoleColor consoleColor = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(peca);
+                    Console.ForegroundColor = consoleColor;
+                }
+
+                Console.Write(" ");
             }
         }
     }

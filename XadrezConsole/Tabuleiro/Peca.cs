@@ -1,6 +1,6 @@
 ﻿namespace JogoTabuleiro.Tabuleiro
 {
-    internal class Peca
+    abstract class Peca
     {
         public Posicao Posicao { get; set; }
 
@@ -22,5 +22,7 @@
         {
             QuantidadeMovimento++;
         }
+
+        public abstract bool[,] MovimentosPossiveis();
     }
 }
