@@ -23,7 +23,7 @@ namespace Xadrez
         public override bool[,] MovimentosPossiveis()
         {
             bool[,] matriz = new bool[Tabuleiro.Linhas, Tabuleiro.Colunas];
-            Posicao posicao = new Posicao(0, 0);
+            Posicao posicao = new(0, 0);
 
 
             // acima
@@ -35,7 +35,7 @@ namespace Xadrez
                 {
                     break;
                 }
-                posicao.Linha = posicao.Linha - 1;
+                posicao.Linha--;
             }
 
             // abaixo
@@ -48,7 +48,7 @@ namespace Xadrez
                     break;
                 }
 
-                posicao.Linha = posicao.Linha + 1;
+                posicao.Linha++;
             }
 
             // direita
@@ -61,9 +61,9 @@ namespace Xadrez
                     break;
                 }
 
-                posicao.Coluna = posicao.Coluna + 1;
+                posicao.Coluna++;
             }
-            
+
             // esquerda
             posicao.DefinirValores(Posicao.Linha, Posicao.Coluna - 1);
             while (Tabuleiro.PosicaoValida(posicao) && PodeMover(posicao))
@@ -74,7 +74,7 @@ namespace Xadrez
                     break;
                 }
 
-                posicao.Coluna = posicao.Coluna - 1;
+                posicao.Coluna--;
 
             }
 

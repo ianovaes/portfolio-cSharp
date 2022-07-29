@@ -36,7 +36,7 @@
             {
                 throw new TabuleiroException("Já existe uma peça nessa posição!");
             }
-            
+
             _pecas[posicao.Linha, posicao.Coluna] = peca;
             peca.Posicao = posicao;
         }
