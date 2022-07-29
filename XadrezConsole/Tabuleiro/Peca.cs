@@ -2,7 +2,7 @@
 {
     abstract class Peca
     {
-        public Posicao Posicao { get; set; }
+        public Posicao? Posicao { get; set; }
 
         public Cor Cor { get; protected set; }
 
@@ -18,10 +18,16 @@
             QuantidadeMovimento = 0;
         }
 
-        public void ImcrementarQtdeMovimento()
+        public void IncrementarQtdeMovimento()
         {
             QuantidadeMovimento++;
         }
+
+        public void DecrementarQtdeMovimento()
+        {
+            QuantidadeMovimento--;
+        }
+
         public bool ExisteMovimentosPossiveis()
         {
             bool[,] matriz = MovimentosPossiveis();
