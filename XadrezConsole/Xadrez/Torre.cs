@@ -25,7 +25,6 @@ namespace Xadrez
             bool[,] matriz = new bool[Tabuleiro.Linhas, Tabuleiro.Colunas];
             Posicao posicao = new(0, 0);
 
-
             // acima
             posicao.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
             while (Tabuleiro.PosicaoValida(posicao) && PodeMover(posicao))
