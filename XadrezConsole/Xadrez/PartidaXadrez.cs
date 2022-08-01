@@ -68,7 +68,7 @@ namespace Xadrez
             }
 
             // #jogadaespecial en passant
-            if (peca is Peca)
+            if (peca is Peao)
             {
                 if (origem.Coluna != destino.Coluna && pecaCapturada == null)
                 {
@@ -126,7 +126,7 @@ namespace Xadrez
             }
 
             // #jogadaespecial en passant
-            if (peca is Peca)
+            if (peca is Peao)
             {
                 if (origem.Coluna != destino.Coluna && pecaCapturada == VuneravelEnPassant)
                 {
@@ -157,6 +157,23 @@ namespace Xadrez
                 throw new TabuleiroException("Você não pode se colocar em xeque!");
             }
 
+            Peca peca = Tabuleiro.Peca(destino);
+
+            // #jogadaespecial promoção
+            if (peca is Peao)
+            {
+                if ((peca.Cor == Cor.Branca & destino.Linha == 0)
+                    || (peca.Cor == Cor.Preta && destino.Linha == 7))
+                {
+                    peca = Tabuleiro.RetirarPeca(destino);
+                    _pecas.Remove(peca);
+                    Peca dama = new Dama(Tabuleiro, peca.Cor);
+                    Tabuleiro.ColocarPeca(dama, destino);
+                    _pecas.Add(dama);
+                }
+            }
+
+
             if (EstaEmXeque(Adversaria(JogadorAaual)))
             {
                 Xeque = true;
@@ -176,7 +193,6 @@ namespace Xadrez
                 MudarJogador();
             }
 
-            Peca peca = Tabuleiro.Peca(destino);
             // #jogadaespecial en passant
             if (peca is Peao && (destino.Linha == origem.Linha - 2
                 || destino.Linha == origem.Linha + 2))
@@ -213,8 +229,6 @@ namespace Xadrez
             {
                 throw new TabuleiroException("Posição de destino inválida!");
             }
-
-
         }
 
         private void MudarJogador()
